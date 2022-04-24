@@ -24,3 +24,23 @@ button {
 .line:nth-child(3) {
   margin-left: 20px;
 }
+
+
+/* CLASSES FOR EACH FORMAT */
+
+.number {
+  color: red;
+}
+
+.var {
+  color: blue;
+  font-weight: 700;
+}
+
+.keyword {
+  font-weight: 700;
+}
+
+.stringLiteral {
+  color: green;
+}
