@@ -72,7 +72,7 @@ function App() {
    *
    * @param {string} line A single string from the active codeblock
    */
-  console.log(keywords);
+
   const format = (line: string) => {
     // Target one or more digit(s) and only those that are standalone numbers
     const numberRegex: RegExp = /\b\d+(?=([^`]*`[^`]*`)*[^`]*$)\b/g;
@@ -94,6 +94,8 @@ function App() {
     );
 
     // REPLACER CALLBACKS FOR REPLACEALL() METHODS
+    // NOTE: I wouldn't normally use inline styles, just as a general best practice, but as 'class' is a reserved word I'd either have to account for
+    // its use in the keyword regular expression or just use inline styles here. If I had more time to polish I'd do the former.
     const numberReplacer = (x: string) => {
       return `<span style='color: red;'>${x}</span>`;
     };
