@@ -84,7 +84,7 @@ function App() {
     );
 
     // Target string literals, including the backticks
-    const stringRegex = /`.*?`/g;
+    const stringRegex: RegExp = /`.*?`/g;
 
     // Target these specific words that are standalone (declared variable names are extracted and injected with string interpolation),
     // and not between backticks (?=([^\`]*\`[^\`]*\`)*[^\`]*$), unless it's between curly braces (?<=\{)(.*?)(?=\})
