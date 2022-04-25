@@ -1,6 +1,7 @@
 /* eslint-disable no-template-curly-in-string */
 import React, { useState } from "react";
 import "./App.css";
+import { keywords } from "./keywords";
 
 /**
  * I used template literals, string interpolation, RegEx, and several string methods (namely match and replaceAll) to solve this challenge
@@ -71,14 +72,16 @@ function App() {
    *
    * @param {string} line A single string from the active codeblock
    */
-
+  console.log(keywords);
   const format = (line: string) => {
     // Target one or more digit(s) and only those that are standalone numbers
     const numberRegex: RegExp = /\b\d+(?=([^`]*`[^`]*`)*[^`]*$)\b/g;
 
-    // Target these specific words that are standalone and not between backticks
-    const keywordRegex: RegExp =
-      /\b(let|for|const|while)(?=([^`]*`[^`]*`)*[^`]*$)\b/g;
+    // Target these specific words that are standalone and not between backticks (keywords imported from keywords.tsx)
+    const keywordRegex: RegExp = new RegExp(
+      String.raw`\b(${keywords})(?=([^\`]*\`[^\`]*\`)*[^\`]*$)\b`,
+      "g"
+    );
 
     // Target string literals, including the backticks
     const stringRegex = /`.*?`/g;
@@ -91,22 +94,20 @@ function App() {
     );
 
     // REPLACER CALLBACKS FOR REPLACEALL() METHODS
-    // NOTE: Since 'class' is a JS keyword, if I were to polish this further I would either account for that in the keywordRegex, or 
-    // would use inline styling in these spans.
     const numberReplacer = (x: string) => {
-      return `<span class='number'>${x}</span>`;
+      return `<span style='color: red;'>${x}</span>`;
     };
 
     const keywordReplacer = (x: string) => {
-      return `<span class='keyword'>${x}</span>`;
+      return `<span style='font-weight: 700;'>${x}</span>`;
     };
 
     const stringReplacer = (x: string) => {
-      return `<span class='stringLiteral'>${x}</span>`;
+      return `<span style='color: green;'>${x}</span>`;
     };
 
     const variableReplacer = (x: string) => {
-      return `<span class='var'>${x}</span>`;
+      return `<span style='color: blue; font-weight: 700;'>${x}</span>`;
     };
 
     // Format the string
